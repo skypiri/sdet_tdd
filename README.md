@@ -13,4 +13,18 @@
 * Test double : dummy object, stub, spy, fake object를 사용할 수 있지만, 여전히 불편하다
 	+ Test double을 지원하기 위하여 Mock을 사용한다.
 	+ Java에서는 Mockito, jMock이 있다. 본 프로젝트에서는 Mockito를 활용한다.
+
+***
+
+## 2일차
+* 목표
+	+ 코드 스멜 개선, 리팩터링 연습
+	+ 테스트를 통해 SRP, OCP, DIP를 만족시키도록 설계를 개선
+	+ TDD로 실무 프로젝트 코드를 작성할 수 있다.
+	+ Mock Object를 능숙하게 사용할 수 있다.
+	+ GUI 구현을 TDD로 수행할 수 있다.
+	
+### 리팩터링이나 기능 확장도 기존의 빌드 상태와 동작상태를 유지한 상태로 되어야 한다.
+
+
 	
