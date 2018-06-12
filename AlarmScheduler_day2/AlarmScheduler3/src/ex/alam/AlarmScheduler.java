@@ -59,16 +59,16 @@ public class AlarmScheduler {
 		}
 	}
 	
-	private boolean checkWeekday(int td, int locale) {
-
-		if(locale == 1) {
-			return (td >= 1 && td <= 5);
-		} else if(locale == 2) {
-			return (td >= 1 && td <= 7 && td != 5 && td != 6);
-		} else {// default 
-			return (td >= 2 && td <= 6);
-		}
-	}
+//	private boolean checkWeekday(int td, int locale) {
+//
+//		if(locale == 1) {
+//			return (td >= 1 && td <= 5);
+//		} else if(locale == 2) {
+//			return (td >= 1 && td <= 7 && td != 5 && td != 6);
+//		} else {// default 
+//			return (td >= 2 && td <= 6);
+//		}
+//	}
 
 	public void register(int dayOfWeek, int minuteOfDay) {
 		Schedule newSchedule = new Schedule(dayOfWeek, minuteOfDay);
