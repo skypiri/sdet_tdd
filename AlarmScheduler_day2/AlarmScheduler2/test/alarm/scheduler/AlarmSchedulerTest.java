@@ -20,6 +20,19 @@ import os.service.TimeService;
 
 public class AlarmSchedulerTest {
 
+	class TV {
+		public void turnOn() {
+			
+		}
+		
+		public void turnOff() {
+			
+		}
+		
+		public void setChannel(int ch) {
+			
+		}
+	}
 	static final int theTime = 10 * 60;
 	
 	private AlarmAlert alarmSpy;
@@ -116,13 +129,9 @@ public class AlarmSchedulerTest {
 	
 	@Test
 	public void test_support_LED_alarm() throws Exception {
-//		givenThatScheduleIsAddedAs(WEEKEND, theTime);
 		AlarmAlert LED = mock(AlarmAlert.class);
 		givenThatScheduleIsAddedAs(LED, EVERYDAY, theTime);
 		whenItBecomesTheTime(SUNDAY, theTime);
-		
-//		thenItAlarms();
-//		verify(LED).startAlarm();
 		thenItAlarms(LED);
 	}
 
@@ -130,6 +139,36 @@ public class AlarmSchedulerTest {
 		// TODO Auto-generated method stub
 		scheduler.addSchedule(device, day, minute);
 		
+	}
+	
+	@Test
+	public void test_support_TV_control() throws Exception {
+		final TV tv = mock(TV.class);
+		AlarmAlert tvOnCommand = new AlarmAlert() {
+
+			@Override
+			public void startAlarm() {
+				// TODO Auto-generated method stub
+				tv.turnOn();
+			}			
+		};
+		
+		AlarmAlert tvOffCommand = new AlarmAlert() {
+
+			@Override
+			public void startAlarm() {
+				// TODO Auto-generated method stub
+				tv.turnOff();
+			}
+		};
+		
+		givenThatScheduleIsAddedAs(tvOnCommand, EVERYDAY, theTime);
+		whenItBecomesTheTime(MONDAY, theTime);
+		verify(tv).turnOn();
+		
+		givenThatScheduleIsAddedAs(tvOffCommand, EVERYDAY, theTime + 60);
+		whenItBecomesTheTime(MONDAY, theTime + 60);
+		verify(tv).turnOff();
 	}
 	
 }
