@@ -27,15 +27,7 @@ public class PresenterTest {
 		presenter = new Presenter(scheduler, view);
 	}
 
-	@Test
-	public void test_add_schedule_when_user_click_register_button() {
-		givenUserInput(MONDAY, 10*60);	// View
 
-		whenUserClickButton();	// presenter action
-		
-		verify(scheduler).addSchedule(MONDAY, 10*60);	//
-
-	}
 
 	private void givenUserInput(Day day, int minute) {
 		// TODO Auto-generated method stub
@@ -50,6 +42,29 @@ public class PresenterTest {
 
 		presenter.registerSchedule();	// 실제 로직을 작성해야 하는 부분
 		
+	}
+	
+	@Test
+	public void test_add_schedule_when_user_click_register_button() {
+		givenUserInput(MONDAY, 10*60);	// View
+
+		whenUserClickButton();	// presenter action
+		
+		verify(scheduler).addSchedule(MONDAY, 10*60);	//
+
+	}
+	
+	@Test
+	public void test_add_empty_schedule_when_user_click_register_button() {
+		givenUserInput(null, -1);	// View에게 입력이 없는 경우 처리가 이렇게 되어야 한다고 약속되어야 하네.
+
+		whenUserClickButton();	// presenter action
+		
+		verify(scheduler, never()).addSchedule((Day)anyObject(), anyInt());	//
+		verify(view).displayErrorMessage("Invalid Input");
+		
+		
+
 	}
 
 }

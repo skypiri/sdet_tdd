@@ -7,5 +7,7 @@ public interface ScheduleView {
 	Day getDay();
 
 	int getMinutes();
+	
+	void displayErrorMessage(String str);
 
 }

@@ -4,8 +4,6 @@ import alarm.scheduler.AlarmScheduler;
 import alarm.scheduler.view.ScheduleView;
 import os.service.Day;
 
-import static os.service.Day.*;
-
 public class Presenter {
 	private AlarmScheduler scheduler;
 	private ScheduleView view;
@@ -27,8 +25,14 @@ public class Presenter {
 		// Scheduler에게 정보를 전달한다.
 		int userInputMinute = view.getMinutes();
 		Day userInputDays = view.getDay();
-		scheduler.addSchedule(userInputDays, userInputMinute);
+		System.out.println("InputMinute : " + userInputMinute);
+		System.out.println("InputDays : " + userInputDays);
 		
+		if(userInputMinute > 0 || userInputDays != null) {
+			scheduler.addSchedule(userInputDays, userInputMinute);
+		} else {
+			view.displayErrorMessage("Invalid Input");
+		}
 	}
 
 }
