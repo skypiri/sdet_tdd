@@ -44,8 +44,13 @@ public class AlarmSchedulerTest {
 		scheduler.wakeup();
 	}
 	
+	private void thenItAlarms(AlarmAlert device) {
+		verify(device).startAlarm();
+	}
+	
 	private void thenItAlarms() {
-		verify(alarmSpy).startAlarm();
+		thenItAlarms(alarmSpy);
+//		verify(alarmSpy).startAlarm();
 	}
 	
 	private void thenItDoesNotAlarms() {
@@ -117,7 +122,8 @@ public class AlarmSchedulerTest {
 		whenItBecomesTheTime(SUNDAY, theTime);
 		
 //		thenItAlarms();
-		verify(LED).startAlarm();
+//		verify(LED).startAlarm();
+		thenItAlarms(LED);
 	}
 
 	private void givenThatScheduleIsAddedAs(AlarmAlert device, Day day, int minute) {

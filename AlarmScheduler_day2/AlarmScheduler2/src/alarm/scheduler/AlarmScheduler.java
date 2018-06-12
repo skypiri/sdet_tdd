@@ -45,7 +45,8 @@ public class AlarmScheduler {
 	}
 
 	public void addSchedule(Day day, int minute) {
-		this.savedSchedule = new Schedule(this.alarm, day, minute);
+//		this.savedSchedule = new Schedule(this.alarm, day, minute);
+		addSchedule(this.alarm, day, minute);
 	}
 
 	public void addSchedule(AlarmAlert device, Day day, int minute) {
