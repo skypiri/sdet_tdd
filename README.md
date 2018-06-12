@@ -32,6 +32,7 @@
 
 ### AlarmScheduler2
 * 1일차에 이어서 진행된 프로젝트
+* STB Alarm 등의 기능을 실습해본 프로젝트 
 
 ### AlarmScheduler3
 * 지역별 주말 처리를 위한 프로젝트
