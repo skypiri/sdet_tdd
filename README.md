@@ -44,5 +44,15 @@
   - Liskov’s Substitution Principle
   - Interface Segregation Principle
   - Dependency Inversion Principle
+  
+***
+## 실습 : STB Alarm UI (알람을 등록하는 control console을 제공해야 한다)
+* 개발상황
+	- 알람을 등록하는 GUI만 만들면 된다.
+	- 화면의 구성은 미리 협의된 초안이 있으나 향후 바뀔 가능성이 크다.
+	- 일단은 미려한 GUI보다는 동작하는 시나리오를 먼저 보여주기를 원한다.
+	- 향후 여러 GUI 플랫폼을 지원하게 될 수도 있다.
+
+
 
 	
