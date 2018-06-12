@@ -12,17 +12,20 @@ public class AlarmScheduler {
 	class Schedule {
 		Day day;
 		int minute;
+		AlarmAlert deviceType;
 		
-		public Schedule(Day day, int minute) {
+		public Schedule(AlarmAlert device, Day day, int minute) {
 			this.day = day;
 			this.minute = minute;
+			this.deviceType = device;
 		}
+
 	}
 	
 	private AlarmAlert alarm;
 	private TimeService timeService;
 	
-	private Schedule savedSchedule = new Schedule(null, INVALID);
+	private Schedule savedSchedule = new Schedule(alarm, null, INVALID);
 
 
 	public AlarmScheduler(AlarmAlert alarm, TimeService timeService) {
@@ -38,11 +41,14 @@ public class AlarmScheduler {
 			(savedSchedule.day == WEEKEND && today == SUNDAY) ||
 			savedSchedule.day == today)
 			if (savedSchedule.minute == now)
-				alarm.startAlarm();
+				savedSchedule.deviceType.startAlarm();
 	}
 
 	public void addSchedule(Day day, int minute) {
-		this.savedSchedule = new Schedule(day, minute);
+		this.savedSchedule = new Schedule(this.alarm, day, minute);
 	}
 
+	public void addSchedule(AlarmAlert device, Day day, int minute) {
+		this.savedSchedule = new Schedule(device, day, minute);
+	}
 }

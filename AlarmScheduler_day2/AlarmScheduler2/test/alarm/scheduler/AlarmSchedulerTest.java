@@ -1,7 +1,14 @@
 package alarm.scheduler;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static os.service.Day.EVERYDAY;
+import static os.service.Day.MONDAY;
+import static os.service.Day.SUNDAY;
+import static os.service.Day.TUESDAY;
+import static os.service.Day.WEEKEND;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,8 +16,6 @@ import org.junit.Test;
 import alarm.driver.AlarmAlert;
 import os.service.Day;
 import os.service.TimeService;
-
-import static os.service.Day.*;
 
 
 public class AlarmSchedulerTest {
@@ -103,4 +108,22 @@ public class AlarmSchedulerTest {
 		
 		thenItAlarms();
 	}
+	
+	@Test
+	public void test_support_LED_alarm() throws Exception {
+//		givenThatScheduleIsAddedAs(WEEKEND, theTime);
+		AlarmAlert LED = mock(AlarmAlert.class);
+		givenThatScheduleIsAddedAs(LED, EVERYDAY, theTime);
+		whenItBecomesTheTime(SUNDAY, theTime);
+		
+//		thenItAlarms();
+		verify(LED).startAlarm();
+	}
+
+	private void givenThatScheduleIsAddedAs(AlarmAlert device, Day day, int minute) {
+		// TODO Auto-generated method stub
+		scheduler.addSchedule(device, day, minute);
+		
+	}
+	
 }
