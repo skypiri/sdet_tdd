@@ -1,4 +1,4 @@
-# sdet_tdd
+# SDET_TDD
 
 ## Alarm Scheduler
 * TDD로 객체 지향 프로그래밍하기 위한 프로젝트
