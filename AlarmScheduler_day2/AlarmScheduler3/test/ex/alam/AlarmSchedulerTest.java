@@ -86,6 +86,62 @@ public class AlarmSchedulerTest {
 	}
 	
 	@Test
+	public void testShouldAlarmIfWeekendAndItsSaturdayAndItsMinute_InHEBREW() throws Exception {
+		givenLocaleIs(HEBREW);
+		givenThatScheduleIsAddedAs(WEEKEND, theTime);
+		whenItBecomesTheTime(SATURDAY, theTime);
+		thenItAlarms();
+	}
+	
+	@Test
+	public void testShouldAlarmIfWeekendAndItsFridayAndItsMinute_InHEBREW() throws Exception {
+		givenLocaleIs(HEBREW);
+		givenThatScheduleIsAddedAs(WEEKEND, theTime);
+		whenItBecomesTheTime(FRIDAY, theTime);
+		thenItAlarms();
+	}
+	
+	@Test
+	public void testShouldAlarmIfWeekdayAndItsSundayAndItsMinute_InHEBREW() throws Exception {
+		givenLocaleIs(HEBREW);
+		givenThatScheduleIsAddedAs(WEEKDAY, theTime);
+		whenItBecomesTheTime(SUNDAY, theTime);
+		thenItAlarms();
+	}
+	
+	@Test
+	public void testShouldAlarmIfWeekendAndItsFridayAndItsMinute_InARABFARSI() throws Exception {
+		givenLocaleIs(ARABFARSI);
+		givenThatScheduleIsAddedAs(WEEKEND, theTime);
+		whenItBecomesTheTime(FRIDAY, theTime);
+		thenItAlarms();
+	}
+	
+	@Test
+	public void testShouldAlarmIfWeekendAndItsThursdayAndItsMinute_InARABFARSI() throws Exception {
+		givenLocaleIs(ARABFARSI);
+		givenThatScheduleIsAddedAs(WEEKEND, theTime);
+		whenItBecomesTheTime(THURSDAY, theTime);
+		thenItAlarms();
+	}
+	
+	@Test
+	public void testShouldAlarmIfWeekendAndItsSundayAndItsMinute_InARABFARSI() throws Exception {
+		givenLocaleIs(ARABFARSI);
+		givenThatScheduleIsAddedAs(WEEKEND, theTime);
+		whenItBecomesTheTime(SUNDAY, theTime);
+		thenItDoesNotAlarms();
+	}
+	
+	@Test
+	public void testShouldAlarmIfWeekdayAndItsSundayAndItsMinute_InARABFARSI() throws Exception {
+		givenLocaleIs(ARABFARSI);
+		givenThatScheduleIsAddedAs(WEEKDAY, theTime);
+		whenItBecomesTheTime(SUNDAY, theTime);
+		thenItAlarms();
+	}
+	
+	@Test
 	public void alarmAlertIfThereAreMultipleAlarmRegistered() {
 		givenThatScheduleIsAddedAs(FRIDAY, theTime);
 		givenThatScheduleIsAddedAs(THURSDAY, theTime);
@@ -107,6 +163,11 @@ public class AlarmSchedulerTest {
 		scheduler.wakeup();
 	}
 
+
+	private void givenLocaleIs(int locale) {
+		when(timeService.getTimeLocale()).thenReturn(locale);
+	}
+	
 	private void givenThatScheduleIsAddedAs(int day, int minute) {
 		scheduler.register(day, minute);
 	}
