@@ -36,4 +36,13 @@
 ### AlarmScheduler3
 * 지역별 주말 처리를 위한 프로젝트
 
+***
+## 좋은 설계
+* SOLID 설계 원칙
+  - Single Responsibility Principle : 한가지 기능만 수행해라. 이것 저것 다 하려고 하지 마라.
+  - Open Closed Principle
+  - Liskov’s Substitution Principle
+  - Interface Segregation Principle
+  - Dependency Inversion Principle
+
 	
