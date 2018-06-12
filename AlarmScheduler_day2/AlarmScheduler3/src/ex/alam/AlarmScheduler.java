@@ -6,6 +6,8 @@ import java.util.List;
 import ex.alarm.driver.AlarmAlert;
 import ex.os.service.TimeService;
 
+import static ex.os.service.TimeService.*;
+
 public class AlarmScheduler {
 
 	class Schedule {
@@ -35,9 +37,9 @@ public class AlarmScheduler {
 		for (int i = 0; i < savedSchedules.size(); ++i) {
 			int d = savedSchedules.get(i).day;
 			
-			if ( (d == -3) || (d == td) || 
-					(d == -1 && isWeekend(td)) ||
-                    (d == -2 && !isWeekend(td)))
+			if ( (d == EVERYDAY) || (d == td) || 
+					(d == WEEKEND && isWeekend(td)) ||
+                    (d == WEEKDAY && !isWeekend(td)))
             {
 				/* it's the right day */
 				if (min == savedSchedules.get(i).minute)
@@ -50,12 +52,12 @@ public class AlarmScheduler {
 
 	private boolean isWeekend(int td) {
 		int locale = timeService.getTimeLocale();
-		if(locale == 1) {
-			return (td == 6 || td == 7);
-		} else if(locale == 2) {
-			return (td == 5 || td == 6);
+		if(locale == HEBREW) {
+			return (td == FRIDAY || td == SATURDAY);
+		} else if(locale == ARABFARSI) {
+			return (td == THURSDAY || td == FRIDAY);
 		} else {// default 
-			return (td == 7 || td == 1);
+			return (td == SATURDAY || td == SUNDAY);
 		}
 	}
 	
