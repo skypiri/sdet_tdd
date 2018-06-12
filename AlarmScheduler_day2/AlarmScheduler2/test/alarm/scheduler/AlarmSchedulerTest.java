@@ -33,6 +33,17 @@ public class AlarmSchedulerTest {
 			
 		}
 	}
+	
+	class MP3 {
+		public void play() {
+			
+		}
+		
+		public void stop() {
+			
+		}
+	}
+	
 	static final int theTime = 10 * 60;
 	
 	private AlarmAlert alarmSpy;
@@ -169,6 +180,27 @@ public class AlarmSchedulerTest {
 		givenThatScheduleIsAddedAs(tvOffCommand, EVERYDAY, theTime + 60);
 		whenItBecomesTheTime(MONDAY, theTime + 60);
 		verify(tv).turnOff();
+	}
+	
+	@Test
+	public void test_support_MP3_control() throws Exception {
+		final MP3 mp3Player = mock(MP3.class);
+		
+		AlarmAlert mp3PlayCommand = new AlarmAlert() {
+
+			@Override
+			public void startAlarm() {
+				// TODO Auto-generated method stub
+				mp3Player.play();
+				System.out.println("mp3 play");
+				
+			}			
+		};
+		
+		givenThatScheduleIsAddedAs(mp3PlayCommand, EVERYDAY, theTime + 60);
+		whenItBecomesTheTime(MONDAY, theTime + 60);
+		verify(mp3Player).play();
+		
 	}
 	
 }
