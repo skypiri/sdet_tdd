@@ -29,7 +29,11 @@ public class Presenter {
 		System.out.println("InputDays : " + userInputDays);
 		
 		if(userInputMinute > 0 || userInputDays != null) {
-			scheduler.addSchedule(userInputDays, userInputMinute);
+			boolean result = scheduler.addSchedule(userInputDays, userInputMinute);
+			if(!result) {
+				view.displayErrorMessage("Full Schedule");
+				System.out.println("Full Schedule");
+			}
 		} else {
 			view.displayErrorMessage("Invalid Input");
 		}

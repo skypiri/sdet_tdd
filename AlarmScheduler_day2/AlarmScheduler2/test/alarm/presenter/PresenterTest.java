@@ -63,8 +63,29 @@ public class PresenterTest {
 		verify(scheduler, never()).addSchedule((Day)anyObject(), anyInt());	//
 		verify(view).displayErrorMessage("Invalid Input");
 		
+	}
+	
+	@Test
+	public void test_fullSchedule_when_user_input_4schedule() {
 		
-
+		when(scheduler.addSchedule((Day)anyObject(), anyInt())).thenReturn(true, true, true, false);
+		
+		givenUserInput(MONDAY, 10*60);	// View
+		whenUserClickButton();	// presenter action
+		
+		givenUserInput(MONDAY, 11*60);	// View
+		whenUserClickButton();	// presenter action
+		
+		givenUserInput(MONDAY, 12*60);	// View
+		whenUserClickButton();	// presenter action
+		
+		givenUserInput(MONDAY, 13*60);	// View
+		whenUserClickButton();	// presenter action
+		
+		verify(scheduler).addSchedule(MONDAY, 10*60);	//
+		verify(scheduler).addSchedule(MONDAY, 11*60);	//
+		verify(scheduler).addSchedule(MONDAY, 12*60);	//
+		verify(view).displayErrorMessage("Full Schedule");
 	}
 
 }

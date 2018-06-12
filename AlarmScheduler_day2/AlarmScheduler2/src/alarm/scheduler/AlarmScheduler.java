@@ -45,12 +45,18 @@ public class AlarmScheduler implements TimerHandler{
 				savedSchedule.deviceType.startAlarm();
 	}
 
-	public void addSchedule(Day day, int minute) {
+	public boolean addSchedule(Day day, int minute) {
 //		this.savedSchedule = new Schedule(this.alarm, day, minute);
-		addSchedule(this.alarm, day, minute);
+		return addSchedule(this.alarm, day, minute);
 	}
 
-	public void addSchedule(AlarmAlert device, Day day, int minute) {
+	public boolean addSchedule(AlarmAlert device, Day day, int minute) {
 		this.savedSchedule = new Schedule(device, day, minute);
+		if(this.savedSchedule != null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
+
 }
