@@ -24,7 +24,7 @@ public class PresenterTest {
 		
 		scheduler = mock(AlarmScheduler.class);
 		view = mock(ScheduleView.class);
-		presenter = new Presenter();
+		presenter = new Presenter(scheduler);
 	}
 
 	@Test
@@ -47,6 +47,7 @@ public class PresenterTest {
 	}
 
 	private void whenUserClickButton() {
+
 		presenter.registerSchedule();	// 실제 로직을 작성해야 하는 부분
 		
 	}

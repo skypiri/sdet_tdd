@@ -1,9 +1,11 @@
 package alarm.scheduler.view;
 
+import os.service.Day;
+
 public interface ScheduleView {
 
-	Object getDay();
+	Day getDay();
 
-	Object getMinutes();
+	int getMinutes();
 
 }
