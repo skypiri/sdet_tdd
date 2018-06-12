@@ -3,10 +3,11 @@ package alarm.scheduler;
 import alarm.driver.AlarmAlert;
 import os.service.Day;
 import os.service.TimeService;
+import os.service.TimerHandler;
 
 import static os.service.Day.*;
 
-public class AlarmScheduler {
+public class AlarmScheduler implements TimerHandler{
 	private static final int INVALID = -1;
 
 	class Schedule {
