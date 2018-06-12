@@ -19,7 +19,7 @@ import os.service.TimeService;
 
 
 public class AlarmSchedulerTest {
-
+	
 	class TV {
 		public void turnOn() {
 			
@@ -33,6 +33,23 @@ public class AlarmSchedulerTest {
 			
 		}
 	}
+	
+	class TVAlarmAdapter implements AlarmAlert {
+		TV tvDevice;
+		public TVAlarmAdapter(TV tv) {
+			// TODO Auto-generated constructor stub
+			this.tvDevice = tv;
+		}
+
+		@Override
+		public void startAlarm() {
+			// TODO Auto-generated method stub
+			System.out.println("TVAdapter On");
+			tvDevice.turnOn();
+			
+		}
+		
+	};
 	
 	class MP3 {
 		public void play() {
@@ -155,31 +172,12 @@ public class AlarmSchedulerTest {
 	@Test
 	public void test_support_TV_control() throws Exception {
 		final TV tv = mock(TV.class);
-		AlarmAlert tvOnCommand = new AlarmAlert() {
-
-			@Override
-			public void startAlarm() {
-				// TODO Auto-generated method stub
-				tv.turnOn();
-			}			
-		};
-		
-		AlarmAlert tvOffCommand = new AlarmAlert() {
-
-			@Override
-			public void startAlarm() {
-				// TODO Auto-generated method stub
-				tv.turnOff();
-			}
-		};
+		AlarmAlert tvOnCommand = new TVAlarmAdapter(tv);
 		
 		givenThatScheduleIsAddedAs(tvOnCommand, EVERYDAY, theTime);
 		whenItBecomesTheTime(MONDAY, theTime);
 		verify(tv).turnOn();
-		
-		givenThatScheduleIsAddedAs(tvOffCommand, EVERYDAY, theTime + 60);
-		whenItBecomesTheTime(MONDAY, theTime + 60);
-		verify(tv).turnOff();
+
 	}
 	
 	@Test
