@@ -24,7 +24,7 @@ public class PresenterTest {
 		
 		scheduler = mock(AlarmScheduler.class);
 		view = mock(ScheduleView.class);
-		presenter = new Presenter(scheduler);
+		presenter = new Presenter(scheduler, view);
 	}
 
 	@Test
