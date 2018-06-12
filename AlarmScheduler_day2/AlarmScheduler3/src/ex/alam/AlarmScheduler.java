@@ -30,14 +30,14 @@ public class AlarmScheduler {
 	public void wakeup() {
 		int min = timeService.getCurrentMinute();
 		int td = timeService.getCurrentDay();
-		int locale = timeService.getTimeLocale();
+
 		
 		for (int i = 0; i < savedSchedules.size(); ++i) {
 			int d = savedSchedules.get(i).day;
 			
 			if ( (d == -3) || (d == td) || 
-					(d == -1 && checkWeekend(td, locale)) ||
-                    (d == -2 && checkWeekday(td, locale)))
+					(d == -1 && isWeekend(td)) ||
+                    (d == -2 && !isWeekend(td)))
             {
 				/* it's the right day */
 				if (min == savedSchedules.get(i).minute)
@@ -48,8 +48,8 @@ public class AlarmScheduler {
 		}
 	}
 
-	private boolean checkWeekend(int td, int locale) {
-
+	private boolean isWeekend(int td) {
+		int locale = timeService.getTimeLocale();
 		if(locale == 1) {
 			return (td == 6 || td == 7);
 		} else if(locale == 2) {
